@@ -35,7 +35,7 @@ const Products = () => {
       prevItems.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
-    )
+    );
   };
 
   const decreaseItem = (id: string) => {
@@ -48,57 +48,55 @@ const Products = () => {
             }
           : item
       )
-    )
+    );
   };
 
   const removeFromCart = (id: string) => {
     setItems(items.filter((item) => item.id !== id));
   };
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(items))
-  }, [items])
-
   return (
-    <div className="p-3 flex flex-wrap gap-3 justify-center items-center mt-10">
-      {products.map((prod) => (
-        <div className="w-[20%] shadow-sm bg-secondary/5 p-5 rounded-md">
-          <p>{prod.name}</p>
-          <p>{prod.price}</p>
-          <div className="flex items-center my-2 justify-around">
-            <FaMinus
-              size={28}
-              color="#FFF"
-              className="text-white bg-primary p-2 rounded-lg cursor-pointer"
-              onClick={() => decreaseItem(prod.id)}
-            />
-            <span>
-              {items.find((item) => item.id === prod.id)?.quantity ?? 0}
-            </span>
-            <FaPlus
-              size={28}
-              color="#FFF"
-              className="text-white bg-primary p-2 rounded-lg cursor-pointer"
-              onClick={() => increaseItem(prod.id)}
-            />
+    <div className="relative">
+      <div className="p-3 flex flex-wrap gap-3 justify-center items-center mt-10">
+        {products.map((prod) => (
+          <div className="w-[20%] shadow-sm bg-secondary/5 p-5 rounded-md">
+            <p>{prod.name}</p>
+            <p>{prod.price}</p>
+            <div className="flex items-center my-2 justify-around">
+              <FaMinus
+                size={28}
+                color="#FFF"
+                className="text-white bg-primary p-2 rounded-lg cursor-pointer"
+                onClick={() => decreaseItem(prod.id)}
+              />
+              <span>
+                {items.find((item) => item.id === prod.id)?.quantity ?? 0}
+              </span>
+              <FaPlus
+                size={28}
+                color="#FFF"
+                className="text-white bg-primary p-2 rounded-lg cursor-pointer"
+                onClick={() => increaseItem(prod.id)}
+              />
+            </div>
+            {items.find((item) => item.id === prod.id) ? (
+              <button
+                className="border-2 border-primary bg-white mt-2 p-3 text-primary rounded-lg w-full"
+                onClick={() => removeFromCart(prod.id)}
+              >
+                Remove from cart
+              </button>
+            ) : (
+              <button
+                className="bg-primary mt-2 p-3 text-white rounded-lg w-full"
+                onClick={() => addToCart(prod)}
+              >
+                Add to cart
+              </button>
+            )}
           </div>
-          {items.find((item) => item.id === prod.id) ? (
-            <button
-              className="border-2 border-primary bg-white mt-2 p-3 text-primary rounded-lg w-full"
-              onClick={() => removeFromCart(prod.id)}
-            >
-              Remove from cart
-            </button>
-          ) : (
-            <button
-              className="bg-primary mt-2 p-3 text-white rounded-lg w-full"
-              onClick={() => addToCart(prod)}
-            >
-              Add to cart
-            </button>
-          )}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
