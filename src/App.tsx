@@ -99,12 +99,15 @@ const App = () => {
           </div>
         ))}
           </div>
-          <button className="w-[75%] bg-primary absolute bottom-10 text-white flex justify-center p-3 rounded-lg" onClick={() => setShowCheckout(true)}>Checkout</button>
+          <button className="w-full bg-primary text-white flex justify-center p-3 rounded-lg mt-5" onClick={() => setShowCheckout(true)}>Checkout</button>
         </div>
       )}
       {
         showCheckout && (
-          <Checkout />
+          <div className="absolute w-[30%] top-52 left-52 bg-white p-6">
+            <FaXmark size={30} onClick={() => setShowCheckout(false)} className="cursor-pointer"/>
+            <Checkout />
+          </div>
         )
       }
     </div>

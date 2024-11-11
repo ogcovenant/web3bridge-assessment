@@ -10,7 +10,7 @@ const Checkout = () => {
   const total = subtotal - discountAmount;
 
   return (
-    <div className="absolute w-[30%] top-52 left-52 bg-white p-6">
+    <div className="">
       <h2 className="text-2xl">Checkout</h2>
       <p className="mt-5">Subtotal: ${subtotal.toFixed(2)}</p>
       <p>Discount: -${discountAmount.toFixed(2)}</p>
